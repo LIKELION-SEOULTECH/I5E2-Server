@@ -16,6 +16,14 @@ public class PostController {
 
     private final PostService postService;
 
+    // 게시글 생성
+    @PostMapping
+    public Post createPost(@RequestParam String password,
+                           @RequestParam String title,
+                           @RequestParam String content) {
+        return postService.createPost(password, title, content);
+    }
+
     // 모든 게시글 조회
     @GetMapping
     public List<Post> getAllPosts() {
@@ -28,14 +36,6 @@ public class PostController {
         Optional<Post> post = postService.getPostById(postId);
         return post.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    // 게시글 생성
-    @PostMapping
-    public Post createPost(@RequestParam String password,
-                           @RequestParam String title,
-                           @RequestParam String content) {
-        return postService.createPost(password, title, content);
     }
 
     // 게시글 수정
@@ -51,6 +51,7 @@ public class PostController {
                 .orElse(ResponseEntity.status(403).build());
     }
 
+    // 게시글 삭제
     @DeleteMapping("/{postId}")
     public ResponseEntity<String> deletePost(@PathVariable Long postId,
                                              @RequestParam String password) {

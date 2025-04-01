@@ -2,6 +2,8 @@ package org.example.stlog.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 
@@ -16,19 +18,15 @@ public class Post {
     private Long postId;
 
     private String password;
-
     private String title;
-
     private String content;
-
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
 
     // 게시글 생성자
     @Builder
     public Post(String password, String title, String content) {
-        this.password = password;
+        this.password = password;  // 이미 해싱된 값이 들어옴
         this.title = title;
         this.content = content;
         this.createdAt = LocalDateTime.now();
@@ -40,10 +38,5 @@ public class Post {
         this.title = title;
         this.content = content;
         this.updatedAt = LocalDateTime.now();
-    }
-
-    // 비밀번호 검증 기능
-    public boolean checkPassword(String inputPassword) {
-        return this.password.equals(inputPassword);
     }
 }
