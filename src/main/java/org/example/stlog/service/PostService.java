@@ -3,6 +3,9 @@ package org.example.stlog.service;
 import lombok.RequiredArgsConstructor;
 import org.example.stlog.entity.Post;
 import org.example.stlog.repository.PostRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +20,14 @@ public class PostService {
     private final PostRepository postRepository;
     private final PasswordEncoder passwordEncoder;  // SecurityConfig에서 주입받음
 
+    // 페이징된 게시글 목록 조회
+    public Page<Post> getPosts(int page, int size) {
+        return postRepository.findAll(
+                PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt")
+                        .and(Sort.by(Sort.Direction.DESC, "postId")))
+        );  // 최신순 정렬
+    }
+
     // 게시글 생성
     public Post createPost(String password, String title, String content) {
         String encodedPassword = passwordEncoder.encode(password);  // 비밀번호 해싱
@@ -28,10 +39,11 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    // 모든 게시글 조회
-    public List<Post> getAllPost() {
-        return postRepository.findAll();
-    }
+    // 없애도 되나?
+//    // 모든 게시글 조회
+//    public List<Post> getAllPost() {
+//        return postRepository.findAll();
+//    }
 
     // 특정 게시글 조회
     public Optional<Post> getPostById(Long postId) {
