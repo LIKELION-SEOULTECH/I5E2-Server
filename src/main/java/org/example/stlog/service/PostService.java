@@ -5,6 +5,7 @@ import org.example.stlog.entity.Post;
 import org.example.stlog.repository.PostRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +22,10 @@ public class PostService {
 
     // 페이징된 게시글 목록 조회
     public Page<Post> getPosts(int page, int size) {
-        return postRepository.findAll(PageRequest.of(page, size));
+        return postRepository.findAll(
+                PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt")
+                        .and(Sort.by(Sort.Direction.DESC, "postId")))
+        );  // 최신순 정렬
     }
 
     // 게시글 생성

@@ -3,6 +3,7 @@ package org.example.stlog.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.stlog.dto.PasswordRequestDto;
 import org.example.stlog.dto.PostPagingRequestDto;
+import org.example.stlog.dto.PostPagingResponseDto;
 import org.example.stlog.dto.PostRequestDto;
 import org.example.stlog.entity.Post;
 import org.example.stlog.service.PostService;
@@ -10,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -22,8 +22,9 @@ public class PostController {
 
     // 페이징된 게시글 목록 반환
     @PostMapping("/list")
-    public Page<Post> getAllPosts(@RequestBody PostPagingRequestDto request) {
-        return postService.getPosts(request.getPage(), request.getSize());
+    public PostPagingResponseDto getAllPosts(@RequestBody PostPagingRequestDto request) {
+        Page<Post> postPage = postService.getPosts(request.getPage(), request.getSize());
+        return new PostPagingResponseDto(postPage);
     }
 
     // 게시글 생성
