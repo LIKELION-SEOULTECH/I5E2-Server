@@ -1,7 +1,7 @@
-package org.example.stlog.dto;
+package org.example.stlog.post.dto;
 
 import lombok.Getter;
-import org.example.stlog.entity.Post;
+import org.example.stlog.post.entity.Post;
 import org.springframework.data.domain.Page;
 import java.util.List;
 

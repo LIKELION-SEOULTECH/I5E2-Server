@@ -1,11 +1,12 @@
-package org.example.stlog.entity;
+package org.example.stlog.post.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.example.stlog.comment.entity.Comment;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -22,6 +23,9 @@ public class Post {
     private String content;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
 
     // 게시글 생성자
     @Builder
