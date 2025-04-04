@@ -1,6 +1,6 @@
-package org.example.stlog.repository;
+package org.example.stlog.post.repository;
 
-import org.example.stlog.entity.Post;
+import org.example.stlog.post.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
