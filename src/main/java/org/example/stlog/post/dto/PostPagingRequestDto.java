@@ -1,4 +1,4 @@
-package org.example.stlog.dto;
+package org.example.stlog.post.dto;
 
 import lombok.Getter;
 import lombok.Setter;

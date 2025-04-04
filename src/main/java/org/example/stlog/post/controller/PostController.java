@@ -1,12 +1,12 @@
-package org.example.stlog.controller;
+package org.example.stlog.post.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.stlog.dto.PasswordRequestDto;
-import org.example.stlog.dto.PostPagingRequestDto;
-import org.example.stlog.dto.PostPagingResponseDto;
-import org.example.stlog.dto.PostRequestDto;
-import org.example.stlog.entity.Post;
-import org.example.stlog.service.PostService;
+import org.example.stlog.post.dto.PasswordRequestDto;
+import org.example.stlog.post.dto.PostPagingRequestDto;
+import org.example.stlog.post.dto.PostPagingResponseDto;
+import org.example.stlog.post.dto.PostRequestDto;
+import org.example.stlog.post.entity.Post;
+import org.example.stlog.post.service.PostService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
