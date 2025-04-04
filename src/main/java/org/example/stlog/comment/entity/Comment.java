@@ -2,6 +2,8 @@ package org.example.stlog.comment.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.stlog.post.entity.Post;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,7 +16,9 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentId;
 
-    private Long postId;  // 댓글이 달린 게시글 ID
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id")
+    private Post post;  // JPA의 연관관계 매핑을 위해
 
     private String content;
 
@@ -25,8 +29,8 @@ public class Comment {
     private LocalDateTime updatedAt;
 
     @Builder
-    public Comment(Long postId, String content, String commentPassword) {
-        this.postId = postId;
+    public Comment(Post post, String content, String commentPassword) {
+        this.post = post;  // // postId가 아니라 Post 객체
         this.content = content;
         this.commentPassword = commentPassword;
         this.createdAt = LocalDateTime.now();
