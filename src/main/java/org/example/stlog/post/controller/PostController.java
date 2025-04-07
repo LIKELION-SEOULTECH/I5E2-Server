@@ -21,7 +21,7 @@ public class PostController {
     private final PostService postService;
 
     // 페이징된 게시글 목록 반환
-    @PostMapping()
+    @PostMapping("/list")
     public PostPagingResponseDto getAllPosts(@RequestBody PostPagingRequestDto request) {
         Page<Post> postPage = postService.getPosts(request.getPage(), request.getSize());
         return new PostPagingResponseDto(postPage);

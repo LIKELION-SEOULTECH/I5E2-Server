@@ -25,7 +25,7 @@ public class CommentController {
     }
 
     // 댓글 조회 (페이징 포함)
-    @PostMapping("/{postId}")
+    @PostMapping("/{postId}/list")
     public ResponseEntity<Page<CommentResponseDto>> getCommentsByPage(
             @PathVariable Long postId,  // URL Path -> RESTful한 설계
             @RequestBody CommentPageRequestDto dto) {
