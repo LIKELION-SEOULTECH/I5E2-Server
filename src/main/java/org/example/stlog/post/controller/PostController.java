@@ -14,21 +14,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/api/v1/post")
 @RequiredArgsConstructor
 public class PostController {
 
     private final PostService postService;
 
     // 페이징된 게시글 목록 반환
-    @PostMapping("/list")
+    @PostMapping()
     public PostPagingResponseDto getAllPosts(@RequestBody PostPagingRequestDto request) {
         Page<Post> postPage = postService.getPosts(request.getPage(), request.getSize());
         return new PostPagingResponseDto(postPage);
     }
 
     // 게시글 생성
-    @PostMapping
+    @PostMapping()
     public Post createPost(@RequestBody PostRequestDto requestDto) {
         return postService.createPost(requestDto.getPassword(), requestDto.getTitle(), requestDto.getContent());
     }
