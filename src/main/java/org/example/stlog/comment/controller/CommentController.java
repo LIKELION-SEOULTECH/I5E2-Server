@@ -11,13 +11,13 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/comments")
+@RequestMapping("/api/v1/comment")
 public class CommentController {
 
     private final CommentService commentService;
 
     // 댓글 등록
-    @PostMapping("/posts/{postId}/comments")
+    @PostMapping("/{postId}")
     public ResponseEntity<CommentResponseDto> createComment(
             @PathVariable Long postId,  // URL Path -> RESTful한 설계
             @RequestBody CommentRequestDto dto) {
@@ -25,7 +25,7 @@ public class CommentController {
     }
 
     // 댓글 조회 (페이징 포함)
-    @PostMapping("/posts/{postId}/comments/page")
+    @PostMapping("/{postId}/list")
     public ResponseEntity<Page<CommentResponseDto>> getCommentsByPage(
             @PathVariable Long postId,  // URL Path -> RESTful한 설계
             @RequestBody CommentPageRequestDto dto) {
@@ -33,9 +33,8 @@ public class CommentController {
     }
 
     // 댓글 수정
-    @PutMapping("/posts/{postId}/comments/{commentId}")
+    @PutMapping("/{commentId}")
     public ResponseEntity<CommentResponseDto> updateComment(
-            @PathVariable Long postId,  // URL Path -> RESTful한 설계
             @PathVariable Long commentId,
             @RequestBody CommentUpdateDto dto) {
         return commentService.updateComment(commentId, dto)
@@ -44,9 +43,8 @@ public class CommentController {
     }
 
     // 댓글 삭제
-    @DeleteMapping("/posts/{postId}/comments/{commentId}")
+    @DeleteMapping("/{commentId}")
     public ResponseEntity<?> deleteComment(
-            @PathVariable Long postId,  // URL Path -> RESTful한 설계
             @PathVariable Long commentId,
             @RequestBody CommentDeleteDto dto) {
         boolean deleted = commentService.deleteComment(commentId, dto.getCommentPassword());

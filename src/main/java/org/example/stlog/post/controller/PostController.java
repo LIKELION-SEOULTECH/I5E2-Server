@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/api/v1/post")
 @RequiredArgsConstructor
 public class PostController {
 
@@ -28,7 +28,7 @@ public class PostController {
     }
 
     // 게시글 생성
-    @PostMapping
+    @PostMapping()
     public Post createPost(@RequestBody PostRequestDto requestDto) {
         return postService.createPost(requestDto.getPassword(), requestDto.getTitle(), requestDto.getContent());
     }
