@@ -35,7 +35,6 @@ public class PostServiceTest {
         String username = "seokju";
         String password = "1111";
         String encodedPw = "encoded1";
-        String title = "제목제목";
         String content = "내용내용";
 
         when(passwordEncoder.encode(password)).thenReturn(encodedPw);
@@ -43,14 +42,13 @@ public class PostServiceTest {
         Post post = Post.builder()
                 .username(username)
                 .password(encodedPw)
-                .title(title)
                 .content(content)
                 .build();
 
         when(postRepository.save(any(Post.class))).thenReturn(post);
 
         // when
-        Post savedPost = postService.createPost(username, password, title, content);
+        Post savedPost = postService.createPost(username, password, content);
 
         // then
         assertThat(savedPost.getUsername()).isEqualTo(username);
@@ -66,7 +64,6 @@ public class PostServiceTest {
         Post post = Post.builder()
                 .username("test")
                 .password("pw")
-                .title("test title")
                 .content("test content")
                 .build();
         post.setEmotion("happy");
@@ -78,7 +75,6 @@ public class PostServiceTest {
 
         // then
         assertThat(result).isPresent();
-        assertThat(result.get().getTitle()).isEqualTo("test title");
     }
 
 

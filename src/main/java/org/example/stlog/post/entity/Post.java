@@ -21,7 +21,6 @@ public class Post {
     private String username;
     private String emotion;
     private String password;
-    private String title;
     private String content;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -31,11 +30,10 @@ public class Post {
 
     // 게시글 생성자
     @Builder
-    public Post(String username, String emotion, String password, String title, String content) {
+    public Post(String username, String emotion, String password, String content) {
         this.username = username;
         this.emotion = emotion;
         this.password = password;  // 이미 해싱된 값이 들어옴
-        this.title = title;
         this.content = content;
         this.username = username;
         this.createdAt = LocalDateTime.now();
@@ -43,8 +41,7 @@ public class Post {
     }
 
     // 게시글 수정 기능
-    public void update(String title, String content) {
-        this.title = title;
+    public void update( String content) {
         this.content = content;
         this.updatedAt = LocalDateTime.now();
     }
