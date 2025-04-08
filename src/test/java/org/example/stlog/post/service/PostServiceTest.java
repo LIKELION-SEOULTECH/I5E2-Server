@@ -36,19 +36,20 @@ public class PostServiceTest {
         String password = "1111";
         String encodedPw = "encoded1";
         String content = "내용내용";
-
+        String emotion = "굳";
         when(passwordEncoder.encode(password)).thenReturn(encodedPw);
 
         Post post = Post.builder()
                 .username(username)
                 .password(encodedPw)
                 .content(content)
+                .emotion(emotion)
                 .build();
 
         when(postRepository.save(any(Post.class))).thenReturn(post);
 
         // when
-        Post savedPost = postService.createPost(username, password, content);
+        Post savedPost = postService.createPost(username, password, content, emotion);
 
         // then
         assertThat(savedPost.getUsername()).isEqualTo(username);

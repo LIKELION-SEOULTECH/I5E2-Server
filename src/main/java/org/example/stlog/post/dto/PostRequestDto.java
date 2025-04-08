@@ -9,4 +9,5 @@ public class PostRequestDto {  // 게시글 생성 및 수정에 필요한 데�
     private String username;
     private String password;
     private String content;
+    private String emotion;
 }
