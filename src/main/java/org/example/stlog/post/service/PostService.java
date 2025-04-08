@@ -28,13 +28,14 @@ public class PostService {
     }
 
     // 게시글 생성
-    public Post createPost(String password, String title, String content) {
+    public Post createPost(String username, String password, String title, String content) {
         String encodedPassword = passwordEncoder.encode(password);  // 비밀번호 해싱
         Post post = Post.builder()
+                .username(username)
                 .password(encodedPassword)
                 .title(title)
                 .content(content)
-                .build();
+                .build(); // emotion은 일단 Null로 해놓을게요
         return postRepository.save(post);
     }
 

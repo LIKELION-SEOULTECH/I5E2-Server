@@ -30,7 +30,7 @@ public class PostController {
     // 게시글 생성
     @PostMapping()
     public Post createPost(@RequestBody PostRequestDto requestDto) {
-        return postService.createPost(requestDto.getPassword(), requestDto.getTitle(), requestDto.getContent());
+        return postService.createPost(requestDto.getUsername(), requestDto.getPassword(), requestDto.getTitle(), requestDto.getContent());
     }
 
     // 없애도 되나?
