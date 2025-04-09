@@ -67,7 +67,7 @@ public class PostServiceTest {
                 .password("pw")
                 .content("test content")
                 .build();
-        post.setEmotion("happy");
+
 
         when(postRepository.findById(1L)).thenReturn(Optional.of(post));
 
