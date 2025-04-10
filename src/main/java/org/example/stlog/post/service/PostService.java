@@ -28,11 +28,12 @@ public class PostService {
     }
 
     // 게시글 생성
-    public Post createPost(String password, String title, String content) {
+    public Post createPost(String username, String password, String content, String emotion) {
         String encodedPassword = passwordEncoder.encode(password);  // 비밀번호 해싱
         Post post = Post.builder()
+                .emotion(emotion)
+                .username(username)
                 .password(encodedPassword)
-                .title(title)
                 .content(content)
                 .build();
         return postRepository.save(post);
@@ -51,7 +52,7 @@ public class PostService {
 
     // 게시물 수정 (비밀번호 확인 후 수정)
     @Transactional
-    public Optional<Post> updatePost(Long postId, String password, String title, String content) {
+    public Optional<Post> updatePost(Long postId, String password, String username, String content) {
         Optional<Post> optionalPost = postRepository.findById(postId);
 
         if (optionalPost.isPresent()) {
@@ -59,7 +60,7 @@ public class PostService {
 
             // 비밀번호 검증
             if (passwordEncoder.matches(password, post.getPassword())) {
-                post.update(title, content);
+                post.update(content);
                 return Optional.of(postRepository.save(post));
             }
         }

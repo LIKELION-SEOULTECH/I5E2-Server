@@ -30,7 +30,7 @@ public class PostController {
     // 게시글 생성
     @PostMapping()
     public Post createPost(@RequestBody PostRequestDto requestDto) {
-        return postService.createPost(requestDto.getPassword(), requestDto.getTitle(), requestDto.getContent());
+        return postService.createPost(requestDto.getUsername(), requestDto.getPassword(), requestDto.getContent(), requestDto.getEmotion());
     }
 
     // 없애도 되나?
@@ -52,7 +52,7 @@ public class PostController {
     @PutMapping("/{postId}")
     public ResponseEntity<Post> updatePost(@PathVariable Long postId,
                                            @RequestBody PostRequestDto requestDto) {
-        Optional<Post> updatedPost = postService.updatePost(postId, requestDto.getPassword(), requestDto.getTitle(), requestDto.getContent());
+        Optional<Post> updatedPost = postService.updatePost(postId, requestDto.getPassword(),requestDto.getUsername(), requestDto.getContent());
 
         return updatedPost
                 .map(ResponseEntity::ok)  // 수정된 게시글 반환

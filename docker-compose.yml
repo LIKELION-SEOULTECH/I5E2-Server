@@ -14,16 +14,22 @@ services:
 
 
   spring:
-    build: .
+    build : .
     container_name: I5E2
     depends_on:
       - mysql
+      - ai
     ports:
       - "8080:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/I5E2
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 1234
-
+  ai :
+    image: jostar1013/i5e2-app:latest
+    container_name: I5E2_AI
+    ports:
+        - "5001:8000"
+    restart: always
 volumes:
   mysql-data:
